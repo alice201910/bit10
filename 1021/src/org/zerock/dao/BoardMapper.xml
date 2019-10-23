@@ -10,6 +10,27 @@
  	</insert>
  	<select id="select" resultType="org.zerock.domain.BoardVO">
  		select * from tbl_board where bno = #{bno}
- 	</select> 	
+ 	</select> 
+ 	<select id="selectList" resultType="org.zerock.domain.BoardVO">
+ 	<![CDATA[
+ 		select * from 
+        (
+       select 
+  rownum rn,bno,title,content,writer
+from 
+  (
+    select 
+     bno,title,content,writer
+    from tbl_board)
+    where rownum <= (
+    #{page} * #{amount}
+    )
+  )
+where rn > (#{page} -1) * #{amount}
+ 	]]>
+ 	</select> 
+ <select id="getCount" resultType="int">
+ 	select count(bno) from tbl_board
+ </select>
  </mapper>
  

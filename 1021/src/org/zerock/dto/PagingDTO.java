@@ -1,0 +1,54 @@
+package org.zerock.dto;
+
+public class PagingDTO { // data transfer 계층과 계층사이에 데이터 던질 때 사용(param 던짐)
+
+	private int page;
+	private int amount;
+
+	public PagingDTO() {
+		this.page = 1;
+		this.amount = 10;
+	}
+
+	public PagingDTO(String pageStr, String amountStr) {
+		// pageStr
+		try {
+			// page값 0보다작은 값들어왔을 때 처리?
+			this.page = Integer.parseInt(pageStr);
+		} catch (Exception e) {
+			page = 1;
+		}
+		// amountStr
+		try {
+			this.amount = Integer.parseInt(amountStr);
+		} catch (Exception e) {
+			amount = 10;
+		}
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		// 0일 때 아무것도 안하게
+		if (page <= 0) {
+			return;
+		}
+		this.page = page;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	@Override
+	public String toString() {
+		return "PagingDTO [page=" + page + "]";
+	}
+
+}

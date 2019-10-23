@@ -43,7 +43,9 @@ public class SampleController extends HttpServlet {
 		SampleService.INSTANCE.add(str);
 		//get방식임 redirect(url 변경)
 		//1. url 심기
-		resp.sendRedirect("/list?msg=success");
+		//resp.sendRedirect("/list?msg=success"); //응답 한 번 날아갔음 
+		
+		resp.addHeader("Location", "www.naver.com");
 		
 //		req.setAttribute("list", SampleService.INSTANCE.getList());
 //		
