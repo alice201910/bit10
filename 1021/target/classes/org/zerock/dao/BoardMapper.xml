@@ -8,6 +8,12 @@
  		insert into tbl_board(bno,title,content,writer)
  		values(seq_board.nextval, #{title},#{content}, #{writer} ) <!-- getWrite 동작 -->  
  	</insert>
+ 	
+ 	<insert id="insertFile">
+ 	insert into tbl_board_attach (board_no, fname)
+	values (seq_board.currval, #{fname})
+ 	</insert>
+ 	
  	<select id="select" resultType="org.zerock.domain.BoardVO">
  		select * from tbl_board where bno = #{bno}
  	</select> 

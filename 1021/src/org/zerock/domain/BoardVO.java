@@ -1,9 +1,9 @@
 package org.zerock.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,12 +17,21 @@ import lombok.ToString;
 //DTO는 @Data
 @ToString
 @Setter
+@Getter
 public class BoardVO {
 	private Long bno;
 	private String title,content,writer;
 	private Date regdate,updatedate;
 	
+	private List<String> fnames;
 	
+	public BoardVO() {
+		fnames = new ArrayList<>();
+	}
+	
+	public void addFileName(String fname) {
+		fnames.add(fname);
+	}
 	
 //	public BoardVO(Long bno, Date regdate, Date updatedate) {
 //		super();

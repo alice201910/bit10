@@ -19,15 +19,28 @@ public class BoardDAOImpl implements BoardDAO {
 	public boolean insert(BoardVO vo) {
 		boolean result = false;
 
-		try (SqlSession session = factory.openSession()) {
-			
+		SqlSession session = null;
+		
+		
+		try {
+			  session = factory.openSession(false);
+			  
 			  int count = session.insert("org.zerock.dao.BoardMapper.insert",vo);
 			  
+			  List<String> fnames = vo.getFnames();
+			  
+			  for (int i = 0; i < fnames.size(); i++) {
+				  session.insert("org.zerock.dao.BoardMapper.insertFile",fnames.get(i));
+				
+			}
+			  			  
 			  session.commit();
+			  
 			  
 			  result = count == 1? true:false;
 			  
 		}catch (Exception e) {
+			//session.rollback();			
 			e.printStackTrace();
 		}
 		return result;
